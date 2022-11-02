@@ -1,37 +1,35 @@
-import React from 'react'
 import { Button, MenuItem, TextField } from "@material-ui/core";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import ErrorMessage from "../../components/Error/Error";
 import Categories from "../../Data/Categories";
-import './Home.css'
-import { useNavigate } from 'react-router-dom';
+import "./Home.css";
+
 const Home = ({ name, setName, fetchQuestions }) => {
-    const [category, setCategory] = useState("");
-    const [difficulty, setDifficulty] = useState("");
-    const [error, setError] = useState(false);
+  const [category, setCategory] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [error, setError] = useState(false);
 
+const navigate = useNavigate()
 
-
-    const navigate = useNavigate();
-
-    const handleSubmit = () => {
-      if (!category || !difficulty || !name) {
-        setError(true);
-        return;
-      } else {
-        setError(false);
-        fetchQuestions(category, difficulty);
-       navigate("/quiz");
-      }
-    };
+  const handleSubmit = () => {
+    if (!category || !difficulty || !name) {
+      setError(true);
+      return;
+    } else {
+      setError(false);
+      fetchQuestions(category, difficulty);
+      navigate("/quiz");
+    }
+  };
 
   return (
     <div className="content">
       <div className="settings">
         <span style={{ fontSize: 30 }}>Quiz Settings</span>
         <div className="settings__select">
-        {error && <ErrorMessage>Please Fill all the feilds</ErrorMessage>}
-        
+          {error && <ErrorMessage>Please Fill all the feilds</ErrorMessage>}
           <TextField
             style={{ marginBottom: 25 }}
             label="Enter Your Name"
@@ -42,8 +40,8 @@ const Home = ({ name, setName, fetchQuestions }) => {
           <TextField
             select
             label="Select Category"
-            value={difficulty}
-            onChange={(e)=>setDifficulty(e.target.value)}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             variant="outlined"
             style={{ marginBottom: 30 }}
           >
@@ -56,9 +54,8 @@ const Home = ({ name, setName, fetchQuestions }) => {
           <TextField
             select
             label="Select Difficulty"
-           
-           value={category}
-           onChange={(e)=>setCategory(e.target.value)}
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
             variant="outlined"
             style={{ marginBottom: 30 }}
           >
@@ -76,7 +73,7 @@ const Home = ({ name, setName, fetchQuestions }) => {
             variant="contained"
             color="primary"
             size="large"
-           onClick={handleSubmit}
+            onClick={handleSubmit}
           >
             Start Quiz
           </Button>
@@ -84,7 +81,7 @@ const Home = ({ name, setName, fetchQuestions }) => {
       </div>
       <img src="/quiz.svg" className="banner" alt="quiz app" />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

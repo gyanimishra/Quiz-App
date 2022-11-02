@@ -1,6 +1,7 @@
 
-import { useState } from 'react';
 import axios from 'axios'
+import React,{ useState } from 'react';
+
 import { Routes,Route } from 'react-router-dom';
 import './App.css';
 import Footer from './components/Footer/Footer';
@@ -11,7 +12,7 @@ import Result from './Pages/Result/Result';
 
 function App() {
   const [questions, setQuestions] = useState();
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
   const [score, setScore] = useState(0);
 
   const fetchQuestions = async (category = "", difficulty = "") => {
